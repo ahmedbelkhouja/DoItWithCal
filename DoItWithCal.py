@@ -19,7 +19,7 @@ class TodoListApp(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Todo List App")
+        self.title("DoItWithCal")
         self.geometry("400x400")
         style = Style(theme="flatly")
         style.configure("Custon.TEntry", foreground="gray")
@@ -36,6 +36,8 @@ class TodoListApp(tk.Tk):
         self.pending_tasks = {}
 
         self.set_service(self.connect())
+
+        self.pending = False
 
         ttk.Button(self, text="Add", command=self.add_task).pack(pady=5)
 
@@ -77,12 +79,17 @@ class TodoListApp(tk.Tk):
 
 
     def mark_pending(self):
+        if self.pending:
+            messagebox.showinfo("Not So Fast!","Finsh Your previous Pending Task Champ!")
+            return 0
         task_index = self.task_list.curselection()
         if task_index:
             self.task_list.itemconfig(task_index, fg="blue")
             task_text = self.task_list.get(task_index)
-            self.pending_tasks[task_text] = datetime.datetime.now()  
+            self.pending_tasks[task_text] = datetime.datetime.now()
+            self.pending = True  
             self.save_tasks()
+            
 
 
 
@@ -99,6 +106,8 @@ class TodoListApp(tk.Tk):
                 duration = end_time - start_time
 
                 self.create_event(task_text, start_time, end_time, duration.total_seconds()) 
+
+                self.pending = False
 
                 del self.pending_tasks[task_text]
 
@@ -179,7 +188,7 @@ class TodoListApp(tk.Tk):
                     'end': {'dateTime': end_time.isoformat(), 'timeZone': 'GMT'},
                 }
                 event_result = self.service.events().insert(calendarId='primary', body=event).execute()
-                print(f'Event created: {event_result.get("htmlLink")} Well Done!')
+                print(f'Task {summary} is Done Adding it to calendar.... Well Done!')
             else:
                 print("Google Calendar service not initialized.")
 

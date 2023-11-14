@@ -60,15 +60,6 @@ class TodoListApp(tk.Tk):
     def set_service(self, service):
         self.service = service
 
-
-    def view_stats(self):
-        done_count = 0
-        total_count = self.task_list.size()
-        for i in range(total_count):
-            if self.task_list.itemcget(i, "fg") == "green":
-                done_count += 1
-        messagebox.showinfo("Task Statistics", f"Total tasks: {total_count}\nCompleted tasks: {done_count}")
-
     def add_task(self):
         task = self.task_input.get()
         if task != "Enter your todo here...":

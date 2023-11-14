@@ -19,7 +19,7 @@ Make sure you have Python installed on your machine.
 
 ## Installation
    
-git clone https://github.com/your-username/DoItWithCal.git
+git clone https://github.com/ahmedbelkhouja/DoItWithCal.git
 
 cd DoItWithCal
 

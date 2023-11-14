@@ -9,7 +9,7 @@ Mark tasks as done or pending.
 Delete tasks from the list.
 integration with Google Calendar for tracking completed tasks.
 
-##G etting Started
+## Getting Started
 
 These instructions will help you run the app on your local machine.
 
